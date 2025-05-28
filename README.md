@@ -2,6 +2,7 @@
 
 Projeto de uma Pokédex desenvolvida com React e Vite, utilizando JavaScript, Styled Components, TailwindCSS, Axios e React Router.
 
+Link do deploy do projeto: https://pokedex-a6sdz6fte-neithandevs-projects.vercel.app
 ---
 
 ## Tecnologias Utilizadas
