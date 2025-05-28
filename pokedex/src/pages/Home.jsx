@@ -3,6 +3,7 @@ import { usePokemonList } from '../hooks/usePokemon';
 import { PokemonCard } from '../components/PokemonCard';
 import { SearchBar } from '../components/SearchBar';
 import { TypeFilter } from '../components/TypeFilter';
+import { Link } from 'react-router-dom';
 
 export const Home = () => {
     const { allPokemons, loading, currentPage, totalPages, setCurrentPage } = usePokemonList();
@@ -39,18 +40,30 @@ export const Home = () => {
     return (
         <div className="min-h-screen bg-gradient-to-b from-blue-50 to-gray-100 py-8">
             <div className="container mx-auto px-4">
-                <header className="text-center mb-8">
-                    <h1 className="text-4xl font-bold text-blue-800 mb-2">Pokédex</h1>
+                <header className="text-center mb-8 mt-5 relative">
+                    <h1 className="text-4xl font-bold text-black mb-2">Pokédex</h1>
                     <p className="text-gray-600">Encontre seu Pokémon favorito!</p>
+                    <Link
+                        to="/favorites"
+                        className="absolute top-0 right-0 flex items-center gap-2 px-4 py-2 bg-white border-2 border-red-400 rounded-full shadow-md hover:bg-red-50 hover:border-red-500 transition-all duration-200 group"
+                    >
+                        <span className="text-red-500 group-hover:text-red-600 text-lg">❤️</span>
+                        <span className="text-red-600 font-medium hidden md:inline">Meus Favoritos</span>
+                    </Link>
                 </header>
 
                 <div className="flex flex-col md:flex-row gap-4 mb-8">
-                    <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-                    <TypeFilter
-                        selectedType={selectedType}
-                        setSelectedType={setSelectedType}
-                        uniqueTypes={uniqueTypes}
-                    />
+                    <div className="w-full md:w-auto md:flex-1">
+                        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+                    </div>
+
+                    <div className="w-full md:w-auto">
+                        <TypeFilter
+                            selectedType={selectedType}
+                            setSelectedType={setSelectedType}
+                            uniqueTypes={uniqueTypes}
+                        />
+                    </div>
                 </div>
 
                 {loading ? (
@@ -88,8 +101,8 @@ export const Home = () => {
                                     onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                                     disabled={currentPage === 1 || loading}
                                     className={`px-4 py-2 mx-1 rounded-lg transition-colors ${currentPage === 1 || loading
-                                            ? "bg-gray-200 opacity-50 cursor-default"
-                                            : "bg-gray-200 hover:bg-gray-300 cursor-pointer"
+                                        ? "bg-gray-200 opacity-50 cursor-default"
+                                        : "bg-gray-200 hover:bg-gray-300 cursor-pointer"
                                         }`}
                                 >
                                     Anterior
@@ -102,8 +115,8 @@ export const Home = () => {
                                             key={page}
                                             onClick={() => setCurrentPage(page)}
                                             className={`px-4 py-2 mx-1 rounded-lg cursor-pointer transition-colors ${currentPage === page
-                                                    ? "bg-blue-500 text-white"
-                                                    : "bg-gray-200 hover:bg-gray-300"
+                                                ? "bg-black text-white"
+                                                : "bg-gray-200 hover:bg-gray-300"
                                                 }`}
                                         >
                                             {page}
@@ -115,8 +128,8 @@ export const Home = () => {
                                     onClick={() => setCurrentPage(Math.min(Math.ceil(filteredPokemons.length / 20), currentPage + 1))}
                                     disabled={currentPage === Math.ceil(filteredPokemons.length / 20) || loading}
                                     className={`px-4 py-2 mx-1 rounded-lg transition-colors ${currentPage === Math.ceil(filteredPokemons.length / 20) || loading
-                                            ? "bg-gray-200 opacity-50 cursor-default"
-                                            : "bg-gray-200 hover:bg-gray-300 cursor-pointer"
+                                        ? "bg-gray-200 opacity-50 cursor-default"
+                                        : "bg-gray-200 hover:bg-gray-300 cursor-pointer"
                                         }`}
                                 >
                                     Próxima
