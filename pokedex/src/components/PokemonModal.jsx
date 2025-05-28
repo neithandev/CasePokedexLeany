@@ -1,13 +1,15 @@
-import React from 'react';
 import Modal from 'react-modal';
 import { usePokemonModalStore } from '../stores/modalStore';
 import { typeColors } from '../utils/constants';
+import { useEvolutionChain } from '../hooks/useEvolutionChain'; // caminho conforme sua estrutura
+
 
 
 Modal.setAppElement('#root');
 
 export const PokemonModal = () => {
     const { isOpen, closeModal, selectedPokemon } = usePokemonModalStore();
+    const { evolutionChain, loading: loadingEvolution } = useEvolutionChain(selectedPokemon);
 
     if (!selectedPokemon) return null;
 
@@ -34,10 +36,13 @@ export const PokemonModal = () => {
 
                 {/* Corpo */}
                 <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                    {/* Esquerda: imagem e tipos */}
                     <div className="flex flex-col items-center">
                         <img
-                            src={selectedPokemon.sprites.other['official-artwork'].front_default ||
-                                selectedPokemon.sprites.front_default}
+                            src={
+                                selectedPokemon.sprites.other['official-artwork'].front_default ||
+                                selectedPokemon.sprites.front_default
+                            }
                             alt={selectedPokemon.name}
                             className="w-56 h-56 object-contain mb-4 drop-shadow-lg"
                         />
@@ -48,8 +53,8 @@ export const PokemonModal = () => {
                                 <span
                                     key={type.type.name}
                                     className={`px-5 py-2 rounded-full text-white font-bold 
-                         capitalize text-center text-sm shadow-md 
-                         ${typeColors[type.type.name]}`}
+            capitalize text-center text-sm shadow-md 
+            ${typeColors[type.type.name]}`}
                                 >
                                     {type.type.name}
                                 </span>
@@ -57,7 +62,7 @@ export const PokemonModal = () => {
                         </div>
                     </div>
 
-                    {/* Seção Direita (Estatísticas) */}
+                    {/* Direita: Estatísticas */}
                     <div className="flex-1 w-full">
                         <h3 className="text-xl font-semibold mb-4 text-gray-700 border-b pb-2">
                             Estatísticas
@@ -83,6 +88,37 @@ export const PokemonModal = () => {
                             ))}
                         </ul>
                     </div>
+                </div>
+
+                {/* Cadeia Evolutiva (abaixo do conteúdo principal) */}
+                <div className="mt-10">
+                    <h3 className="text-xl font-semibold mb-4 text-gray-700 border-b pb-2">
+                        Cadeia Evolutiva
+                    </h3>
+                    {loadingEvolution ? (
+                        <p className="text-gray-500">Carregando...</p>
+                    ) : (
+                        <div className="flex flex-row items-center justify-center flex-wrap gap-6">
+                            {evolutionChain.map((name, index) => (
+                                <div key={name} className="flex flex-col items-center">
+                                    <img
+                                        src={`https://img.pokemondb.net/artwork/large/${name}.jpg`}
+                                        alt={name}
+                                        className="w-24 h-24 object-contain mb-1"
+                                    />
+                                    <span className="capitalize text-sm text-gray-700">{name}</span>
+                                </div>
+                            )).reduce((acc, curr, index) => {
+                                acc.push(curr);
+                                if (index < evolutionChain.length - 1) {
+                                    acc.push(
+                                        <span key={`arrow-${index}`} className="text-xl text-gray-400 mx-2">→</span>
+                                    );
+                                }
+                                return acc;
+                            }, [])}
+                        </div>
+                    )}
                 </div>
             </div>
         </Modal>

@@ -1,8 +1,28 @@
 export const TypeFilter = ({ selectedType, setSelectedType, uniqueTypes }) => {
     return (
-        <div className="relative w-48"> {/* Container com largura fixa */}
+        <div className="relative w-48">
             <select
-                className="w-full pl-3 pr-8 py-2 capitalize text-sm rounded-xl border border-gray-300 bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-black shadow-sm transition-all cursor-pointer"
+                className="
+          w-full
+          py-3
+          pl-4
+          pr-10
+          rounded-2xl
+          border
+          border-gray-300
+          bg-white
+          text-gray-900
+          capitalize
+          shadow-md
+          focus:outline-none
+          focus:ring-2
+          focus:ring-rose-400
+          focus:border-transparent
+          cursor-pointer
+          transition
+          duration-300
+          appearance-none
+        "
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
             >
@@ -13,11 +33,19 @@ export const TypeFilter = ({ selectedType, setSelectedType, uniqueTypes }) => {
                     </option>
                 ))}
             </select>
-            
+
             {/* Ícone de seta personalizado */}
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                <svg
+                    className="w-5 h-5 text-rose-400"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                >
+                    <path d="M6 9l6 6 6-6" />
                 </svg>
             </div>
         </div>

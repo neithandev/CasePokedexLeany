@@ -41,8 +41,13 @@ export const Home = () => {
         <div className="min-h-screen bg-gradient-to-b from-blue-50 to-gray-100 py-8">
             <div className="container mx-auto px-4">
                 <header className="text-center mb-8 mt-5 relative">
-                    <h1 className="text-4xl font-bold text-black mb-2">Pokédex</h1>
-                    <p className="text-gray-600">Encontre seu Pokémon favorito!</p>
+                    <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-pink-500 to-yellow-500 drop-shadow-lg tracking-wide">
+                        Pokédex
+                    </h1>
+                    <p className="text-lg md:text-xl text-gray-700 mt-2">
+                        Encontre seu <span className="font-semibold text-red-500">Pokémon</span> favorito!
+                    </p>
+
                     <Link
                         to="/favorites"
                         className="absolute top-0 right-0 flex items-center gap-2 px-4 py-2 bg-white border-2 border-red-400 rounded-full shadow-md hover:bg-red-50 hover:border-red-500 transition-all duration-200 group"
@@ -115,7 +120,7 @@ export const Home = () => {
                                             key={page}
                                             onClick={() => setCurrentPage(page)}
                                             className={`px-4 py-2 mx-1 rounded-lg cursor-pointer transition-colors ${currentPage === page
-                                                ? "bg-black text-white"
+                                                ? "bg-pink-500 text-white"
                                                 : "bg-gray-200 hover:bg-gray-300"
                                                 }`}
                                         >
