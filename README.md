@@ -69,6 +69,8 @@ Para o deploy público, recomendamos usar [Vercel](https://vercel.com/) ou outra
 ## Contato
 
 Qualquer dúvida ou sugestão, abra uma issue ou entre em contato.
+E-mail: nathanlunelli@gmail.com
+Linkedin: www.linkedin.com/in/nathan-lunelli-23bb30290
 
 ---
 
